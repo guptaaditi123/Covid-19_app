@@ -39,6 +39,7 @@ df=df.drop(['CARDIOVASCULAR'],axis=1)
 df.drop(df.index[df.INTUBED == 99], axis=0, inplace=True)
 df.drop(df.index[df.INTUBED == 97], axis=0, inplace=True)
 df.drop(df.index[df.ICU== 98], axis=0, inplace=True)
+df.drop(df.index[df.ICU== 97], axis=0, inplace=True)
 
 df['DIED'] = [0 if i=='9999-99-99' else 1 for i in df.DATE_DIED]
 
@@ -117,7 +118,7 @@ def prediction(input_data_df):
 
 if st.button('COVID-19 Prediction Test'):
     pred = prediction(input_data_df)
-    if pred ==1:
-        st.write('The person is dead')
-    else:
+    if pred ==0:
         st.write('The person is recovered')
+    else:
+        st.write('The person is died')
